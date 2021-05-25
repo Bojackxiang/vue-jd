@@ -4,5 +4,13 @@ import router from './router'
 import store from './store'
 import 'normalize.css'
 import './styles/base.scss'
+// element ui
+import ElementPlus from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
 
-createApp(App).use(store).use(router).mount('#app')
+const app = createApp(App)
+app
+  .use(ElementPlus)
+  .use(store)
+  .use(router)
+  .mount('#app')
