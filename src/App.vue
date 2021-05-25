@@ -1,25 +1,36 @@
 <template>
   <div class="docker">
-    <span class="docker__item">
-      <i class="el-icon-s-home"> </i>
-      <span>首页</span>
-    </span>
-    <span class="docker__item">
-      <i class="el-icon-shopping-cart-2"></i>
-      <span>购物车</span>
-    </span>
-    <span class="docker__item">
-      <i class="el-icon-user"></i>
-      <span>用户</span>
-    </span>
-    <span class="docker__item">
-      <i class="el-icon-setting docker__item"></i>
-      <span>设置</span>
+    <span
+      v-for="(item, idx) in dockerItems"
+      :key="idx"
+      class="docker__item"
+      :class="[item.isActive ? 'docker__item--active' : '']"
+    >
+      <i :class="[item.iconName]"></i>
+      <span>{{ item.label }}</span>
     </span>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    const dockerItems = [
+      { iconName: "el-icon-s-home", label: "首页", isActive: true },
+      { iconName: "el-icon-shopping-cart-2", label: "购物车" },
+      { iconName: "el-icon-user", label: "用户" },
+      { iconName: "el-icon-setting", label: "设置" },
+    ];
+    return {
+      dockerItems,
+    };
+  },
+};
+</script>
+
+
 <style lang="scss">
+@import "./styles/config.scss";
 .docker {
   position: absolute;
   display: flex;
@@ -31,17 +42,21 @@
   border-top: 1px solid #000;
   align-items: center;
   justify-content: space-evenly;
-}
-.docker__item {
-  flex: 1;
-  text-align: center;
-  i {
-    font-size: 0.25rem;
+  // & == .docker: 所以这边可以代替
+  &__item {
+    flex: 1;
+    text-align: center;
+    i {
+      font-size: 0.25rem;
+    }
+    span {
+      display: block;
+      font-size: 0.1rem;
+      transform: scale(0.8, 0.8);
+    }
   }
-  span {
-    display: block;
-    font-size: 0.1rem;
-    transform: scale(0.8, 0.8);
+  &__item--active {
+    color: $color_docker_active_item;
   }
 }
 </style>
